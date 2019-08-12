@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import AddField from './components/AddField/AddField';
 import TaskContainer from './components/TaskContainer/TaskContainer';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import AddButton from './components/AddField/AddButton/AddButton';
+import AddForm from './components/AddForm/AddForm';
 import './App.css';
 
 function App() {
@@ -14,17 +16,19 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="header">
-        To Do App
-      </header>
-      <div className="add-block">
-        <AddField submitHandler={addTask}/>
+    <Router>
+      <div className="App">
+        <header className="header">
+          To Do App
+        </header>
+        <div className="tasks-block">
+          <Route path='/tasks' render={() => <TaskContainer tasks={tasks} />} />
+        </div>
+        <div className='form-block'>
+          <Route exact path="/form" component={AddForm} />
+        </div>
       </div>
-      <div className="tasks-block">
-        <TaskContainer tasks={tasks}/>
-      </div>
-    </div>
+    </Router>
   );
 }
 
