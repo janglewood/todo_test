@@ -4,11 +4,11 @@ import TaskContainer from './components/TaskContainer/TaskContainer';
 import './App.css';
 
 function App() {
-  const initialTasks = [1, 2];
-  const[tasks, setTasks] = useState(initialTasks);
+  const initialTasks = ['1', '2'];
+  const [tasks, setTasks] = useState(initialTasks);
 
   const addTask = (e) => {
-    setTasks([...tasks, +e.target.input.value]);
+    setTasks([...tasks, e.target.input.value]);
     e.target.input.value = '';
     console.log(tasks);
   }
