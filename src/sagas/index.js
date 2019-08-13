@@ -1,12 +1,13 @@
 import { all } from 'redux-saga/effects';
 import { addFormSaga } from './addFormSaga';
-import { wentToFormSaga } from './wentToFormSaga';
-import { cancelFormSaga } from './cancelFormSaga';
+
+function* helloSaga() {
+    console.log('Hello Sagas!')
+  }
 
 export function* rootSaga () {
     yield all([
         addFormSaga(),
-        wentToFormSaga(),
-        cancelFormSaga(),
+        helloSaga(),
     ]);
 }

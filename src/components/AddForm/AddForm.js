@@ -5,11 +5,11 @@ import { Form, Field } from 'react-final-form';
 import Container from './styled';
 
 
-const AddForm = (props) => {
+const AddForm = ({addTaskAction, cancelFormAction}) => {
   return (
     <Container>
       <Form
-        onSubmit={props.addTaskAction}
+        onSubmit={addTaskAction}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit}>
             <div>
@@ -51,7 +51,7 @@ const AddForm = (props) => {
             <button type="submit" disabled={submitting || pristine}>
                 Submit
             </button>
-            <button type="button" onClick={props.cancelFormAction}>
+            <button type="button" onClick={cancelFormAction}>
                 Cancel
             </button>
           </form>

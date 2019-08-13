@@ -1,9 +1,19 @@
-import {takeEvery} from 'redux-saga/effects';
+import {takeEvery, all} from 'redux-saga/effects';
+
+const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 function* handleSubmitAddForm() {
-    yield console.log('Will send post request');
+    yield delay(1000);
+    yield console.log('Submit');
 }
 
+function* handleCancelFormSaga() {
+    yield console.log('Wait for user action');
+};  
+
 export function* addFormSaga() {
-    yield takeEvery('ADD_TASK', handleSubmitAddForm);
+    yield all([
+        takeEvery('ADD_TASK', handleSubmitAddForm),
+        takeEvery('CANCEL_FORM', handleCancelFormSaga),
+    ]);
 }

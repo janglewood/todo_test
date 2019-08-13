@@ -1,18 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Button from './styled';
-import { wentToForm } from '../../../actions/index';
 
-const AddButton = (props) => {
+const AddButton = () => {
   return (
-    <Button onClick={props.wentToFormAction}>Add</Button>
+    <Button>Add</Button>
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    wentToFormAction: () => dispatch(wentToForm()),
-  }
-};
-
-export default connect(null, mapDispatchToProps)(AddButton);
+export default AddButton;

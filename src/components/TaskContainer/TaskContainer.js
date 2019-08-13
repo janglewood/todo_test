@@ -8,9 +8,7 @@ import * as S from './styled';
 
 const history = createBrowserHistory();
 
-const TaskContainer = (props) => {
-  const {tasks} = props;
-
+const TaskContainer = ({tasks}) => {
   return (
 		<Router history={history}>
 			<ul>
@@ -29,7 +27,6 @@ const TaskContainer = (props) => {
 }
 
 const mapStateToProps = store => {
-	console.log(store);
 	return {
 		value: store.value,
 	}

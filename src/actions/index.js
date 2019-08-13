@@ -5,14 +5,8 @@ export const addTask = value => {
     }
 };
 
-export const wentToForm = () => {
-    return {
-        type: 'WENT_TO_FORM',
-    }
-};
-
 export const cancelForm = () => {
     return {
         type: 'CANCEL_FORM',
     }
-}
+};
