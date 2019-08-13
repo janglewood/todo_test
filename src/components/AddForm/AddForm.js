@@ -1,26 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import addTask from '../../actions/index';
 import { Form, Field } from 'react-final-form';
 import Container from './styled';
 
 
 const AddForm = (props) => {
-  // const addTask = (e) => {
-  //     e.preventDefault();
-  //     console.log(e.target);
-  // }
-
-  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-  const onSubmit = async values => {
-    await sleep(300);
-    console.log(values);
-    window.alert(JSON.stringify(values, 0, 2));
-  }
-
   return (
     <Container>
       <Form
-        onSubmit={onSubmit}
+        onSubmit={props.addTaskAction}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit}>
             <div>
@@ -69,4 +58,13 @@ const AddForm = (props) => {
   )
 }
 
-export default AddForm;
+const mapDispatchToProps = dispatch => {
+  return {
+    addTaskAction: task => dispatch(addTask(task)),
+  }
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(AddForm);

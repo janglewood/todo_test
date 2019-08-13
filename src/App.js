@@ -1,18 +1,13 @@
 import React, {useState} from 'react';
 import TaskContainer from './components/TaskContainer/TaskContainer';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { connect } from  'react-redux';
 import AddForm from './components/AddForm/AddForm';
 import Header from './components/Header/Header';
 import './App.css';
-import tasksConfig from './configs/tasksConfig';
 
-function App() {
-  const [tasks, setTasks] = useState(tasksConfig);
-
-  // const addTask = (e) => {
-  //   setTasks([...tasks, e.target.input.value]);
-  //   console.log(tasks);
-  // }
+function App(props) {
+  const [tasks, setTasks] = useState(props.tasks);
 
   return (
     <Router>
@@ -25,4 +20,11 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = store => {
+  console.log(store);
+  return {
+    tasks: store.tasks,
+  }
+};
+
+export default connect(mapStateToProps)(App);

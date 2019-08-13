@@ -2,6 +2,7 @@ import React from 'react';
 import Task from './Task/Task';
 import { createBrowserHistory } from 'history';
 import { Route, Router } from 'react-router-dom';
+import { connect } from  'react-redux';
 import AddForm from '../AddForm/AddForm';
 import * as S from './styled';
 
@@ -27,4 +28,11 @@ const TaskContainer = (props) => {
   )
 }
 
-export default TaskContainer;
+const mapStateToProps = store => {
+	console.log(store);
+	return {
+		value: store.value,
+	}
+}
+
+export default connect(mapStateToProps)(TaskContainer);
