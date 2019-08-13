@@ -1,9 +1,10 @@
 import React from 'react';
+import * as S from './styled';
 
 const Task = (props) => {
-	const {value} = props;
+	const { firstName, lastName } = props.value;
   return (
-    <div>{value}</div>
+    <S.Container>{firstName} {lastName}</S.Container>
   )
 }
 

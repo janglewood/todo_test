@@ -1,8 +1,9 @@
 import React from 'react';
+import Button from './styled';
 
 const AddButton = (props) => {
   return (
-    <button>Add</button>
+    <Button>Add</Button>
   )
 }
 
