@@ -7,6 +7,7 @@ const btn = (light, dark) => css`
   padding: 5px 15px;
   font-size: 16px;
   color: white;
+  outline: none;
   &:visited {
     color: white;
   }

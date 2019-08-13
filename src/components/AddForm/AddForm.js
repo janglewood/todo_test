@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import addTask from '../../actions/index';
+import  { addTask, cancelForm } from '../../actions/index';
 import { Form, Field } from 'react-final-form';
 import Container from './styled';
 
@@ -51,6 +51,9 @@ const AddForm = (props) => {
             <button type="submit" disabled={submitting || pristine}>
                 Submit
             </button>
+            <button type="button" onClick={props.cancelFormAction}>
+                Cancel
+            </button>
           </form>
       )}
     />
@@ -61,6 +64,7 @@ const AddForm = (props) => {
 const mapDispatchToProps = dispatch => {
   return {
     addTaskAction: task => dispatch(addTask(task)),
+    cancelFormAction: () => dispatch(cancelForm()),
   }
 };
 
