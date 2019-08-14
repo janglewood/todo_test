@@ -7,8 +7,10 @@ export const UserPage =  (props) => {
     const userData = tasks.tasks[userId - 1];
     console.log(userData);
     return <S.Container>
-            <h3>Name: {`${userData.firstName} ${userData.lastName}`}</h3>
-            <h5>Email: {userData.email || 'none'}</h5>
-            <h5>Description: {userData.description || 'none'}</h5>
+                <h3>Name: {`${userData.firstName} ${userData.lastName}`}</h3>
+                <h5>Email: {userData.email}</h5>
+                <h5>Description: {userData.description || 'none'}</h5>
+
+                <button>Edit profile</button>
            </S.Container>
 };

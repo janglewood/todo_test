@@ -22,6 +22,8 @@ const store = createStore(
     enhancer,
 );
 
-sagaMiddleware.run(rootSaga);
+store.runSaga = sagaMiddleware.run;
+
+// sagaMiddleware.run(rootSaga);
 
 export default store;
