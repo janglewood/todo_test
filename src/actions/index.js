@@ -10,3 +10,10 @@ export const cancelForm = () => {
         type: 'CANCEL_FORM',
     }
 };
+
+export const goToLink = id => {
+    return {
+        type: 'GO_TO_LINK',
+        payload: id,
+    }
+};

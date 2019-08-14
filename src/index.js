@@ -8,6 +8,7 @@ import AddForm from './components/AddForm/AddForm';
 import Header from './components/Header/Header';
 import * as serviceWorker from './serviceWorker';
 import store, { history } from './store/configureStore';
+import { UserPage } from './components/UserPage/UserPage';
 import './index.css';
 
 ReactDOM.render(
@@ -17,6 +18,15 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" render={() => <App />} />
                 <Route exact path="/form" component={AddForm} />
+                <Route
+                    exact
+                    path='/user/:userId/'
+                    render={(history) =>
+                        <UserPage
+                            history={history}
+                            tasks={store.getState().form} 
+                        />} 
+                />
             </Switch>
         </ConnectedRouter>
     </Provider>,

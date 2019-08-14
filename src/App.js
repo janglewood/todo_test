@@ -3,8 +3,8 @@ import TaskContainer from './components/TaskContainer/TaskContainer';
 import { connect } from  'react-redux';
 import './App.css';
 
-function App(state) {
-  const { tasks } = state;
+function App({ tasks, router }) {
+  console.log(router);
   return (
     <div className="App">
       <TaskContainer tasks={tasks} />
@@ -13,7 +13,7 @@ function App(state) {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  // console.log(state);
   return {
     tasks: state.form.tasks,
     router: state.router,

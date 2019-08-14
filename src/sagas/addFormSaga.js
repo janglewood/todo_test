@@ -6,6 +6,7 @@ function* handleSubmitAddForm() {
     const res = yield mockPostRequest();
     console.log(res);
     yield console.log('Submit');
+    yield put(push('/'));
 }
 
 function* handleCancelFormSaga() {

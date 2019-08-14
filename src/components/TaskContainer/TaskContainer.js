@@ -2,29 +2,32 @@ import React from 'react';
 import Task from './Task/Task';
 import { createBrowserHistory } from 'history';
 import { Route, Router } from 'react-router-dom';
+import {bindActionCreators} from 'redux';
+import { goToLink } from '../../actions/index';
 import { connect } from  'react-redux';
 import AddForm from '../AddForm/AddForm';
+import { push } from 'connected-react-router'
 import * as S from './styled';
 
 const history = createBrowserHistory();
 
-const TaskContainer = ({tasks}) => {
+const TaskContainer = ({tasks, push}) => {
   return (
 		<Router history={history}>
 			<ul>
 				{tasks.map((task, index) => {
-					const pageAdress = `/${index + 1}/`;
-						return <S.ListItem key={index}>
-									<S.ButtonLink to={pageAdress}>
-										<Task value={task} />
-									</S.ButtonLink>
+						return <S.ListItem key={index} onClick={() => push(`user/${index + 1}`)} >
+									<Task value={task} />
 								</S.ListItem>	
 						})}
 				</ul>
-				<Route exact path="/form" component={AddForm} />
 		</Router>
   )
 }
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+	push: push,
+}, dispatch);
 
 const mapStateToProps = store => {
 	return {
@@ -32,4 +35,7 @@ const mapStateToProps = store => {
 	}
 }
 
-export default connect(mapStateToProps)(TaskContainer);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(TaskContainer);
