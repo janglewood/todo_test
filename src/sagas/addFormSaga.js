@@ -1,14 +1,15 @@
-import {takeEvery, all} from 'redux-saga/effects';
-
-const delay = (ms) => new Promise(res => setTimeout(res, ms));
+import {takeEvery, all, put} from 'redux-saga/effects';
+import { push } from 'connected-react-router'
+import { mockPostRequest } from '../utils/request';
 
 function* handleSubmitAddForm() {
-    yield delay(1000);
+    const res = yield mockPostRequest();
+    console.log(res);
     yield console.log('Submit');
 }
 
 function* handleCancelFormSaga() {
-    yield console.log('Wait for user action');
+    yield put(push('/'));
 };  
 
 export function* addFormSaga() {

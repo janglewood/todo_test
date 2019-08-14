@@ -1,15 +1,15 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import  { addTask, cancelForm } from '../../actions/index';
 import { Form, Field } from 'react-final-form';
 import Container from './styled';
 
-
-const AddForm = ({addTaskAction, cancelFormAction}) => {
+const AddForm = ({addTask, cancelForm}) => {
   return (
     <Container>
       <Form
-        onSubmit={addTaskAction}
+        onSubmit={(task) => addTask(task)}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit}>
             <div>
@@ -51,7 +51,7 @@ const AddForm = ({addTaskAction, cancelFormAction}) => {
             <button type="submit" disabled={submitting || pristine}>
                 Submit
             </button>
-            <button type="button" onClick={cancelFormAction}>
+            <button type="button" onClick={cancelForm}>
                 Cancel
             </button>
           </form>
@@ -61,12 +61,10 @@ const AddForm = ({addTaskAction, cancelFormAction}) => {
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addTaskAction: task => dispatch(addTask(task)),
-    cancelFormAction: () => dispatch(cancelForm()),
-  }
-};
+const mapDispatchToProps = dispatch => bindActionCreators({
+  addTask: addTask,
+  cancelForm: cancelForm,
+}, dispatch);
 
 export default connect(
   null,

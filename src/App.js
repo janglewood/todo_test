@@ -1,29 +1,22 @@
 import React, {useState} from 'react';
 import TaskContainer from './components/TaskContainer/TaskContainer';
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from  'react-redux';
-import AddForm from './components/AddForm/AddForm';
-import Header from './components/Header/Header';
 import './App.css';
 
-function App(props) {
-  const [tasks, setTasks] = useState(props.tasks);
-
+function App(state) {
+  const { tasks } = state;
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Route exact path='/' render={() => <TaskContainer tasks={tasks} />} />
-        <Route exact path="/form" component={AddForm} />
-      </div>
-    </Router>
+    <div className="App">
+      <TaskContainer tasks={tasks} />
+    </div>
   );
 }
 
-const mapStateToProps = store => {
-  console.log(store);
+const mapStateToProps = state => {
+  console.log(state);
   return {
-    tasks: store.tasks,
+    tasks: state.form.tasks,
+    router: state.router,
   }
 };
 
