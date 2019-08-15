@@ -1,11 +1,9 @@
 import React from 'react';
 import Task from './Task/Task';
 import { createBrowserHistory } from 'history';
-import { Route, Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import {bindActionCreators} from 'redux';
-import { goToLink } from '../../actions/index';
 import { connect } from  'react-redux';
-import AddForm from '../AddForm/AddForm';
 import { push } from 'connected-react-router'
 import * as S from './styled';
 

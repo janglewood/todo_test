@@ -4,6 +4,6 @@ function logger(res, data) {
 }
 
 export function mockPostRequest() {
-    return new Promise(resolve => 
+    return new Promise((resolve, reject) => 
         setTimeout(logger.bind(null, resolve, {success: true}), 1000));
 }

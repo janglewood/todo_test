@@ -6,14 +6,37 @@ import { Form, Field } from 'react-final-form';
 import Container from './styled';
 import { useSaga } from '../../hooks/useSaga';
 import { addFormFlowSaga } from '../../sagas/addFormSaga';
+import MakeAsyncFunction from 'react-redux-promise-listener'
+import { promiseListener } from '../../store/configureStore';
 
-const AddForm = ({addTask, cancelForm}) => {
+const AddForm = (props) => {
+  const {cancelForm} = props;
   useSaga(addFormFlowSaga);
+
+  const createField = ({ input, meta }, type, placeholder, isRequired, component) => {
+    return ( 
+      <div>
+        <label>{placeholder}</label>
+        {component === 'input' ? 
+          <input {...input} type={type} placeholder={placeholder} />
+          :
+          <textarea {...input} type={type} placeholder={placeholder} />
+        }
+        {isRequired ? meta.error && meta.touched && <span>{meta.error}</span> : null}
+      </div>
+      )                 
+  }
 
   return (
     <Container>
+      <MakeAsyncFunction
+        listener={promiseListener}
+        start='ADD_TASK'
+        resolve='ADD_TASK_TO_STORE'
+        reject='SUBMIT_FALSE'
+      >{asyncFunc => ( 
       <Form
-        onSubmit={addTask}
+        onSubmit={asyncFunc}
         validate={values => {
           const errors = {};
           if (!values.firstName) {
@@ -27,57 +50,42 @@ const AddForm = ({addTask, cancelForm}) => {
           }
           return errors;
         }}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
+        render={({ handleSubmit, form, submitting, pristine, values, submitErrors }) => {
+          return (
           <form onSubmit={handleSubmit}>
             <Field name="firstName">
-              {({ input, meta }) => (
-                <div>
-                  <label>First name</label>
-                  <input {...input} type="text" placeholder="First name" />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
-                </div>
+              {(data) => (
+                createField(data, 'text', 'First name', true, 'input')
               )}
             </Field>
             <Field name="lastName">
-              {({ input, meta }) => (
-                <div>
-                  <label>Last name</label>
-                  <input {...input} type="text" placeholder="Last name" />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
-                </div>
+              {(data) => (
+                createField(data, 'text', 'Last name', true, 'input')
               )}
             </Field>
             <Field name="email">
-              {({ input, meta }) => (
-                <div>
-                  <label>Email</label>
-                  <input {...input} type="email" placeholder="Email" />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
-                </div>
+              {(data) => (
+                  createField(data, 'email', 'Email', true, 'input')
               )}
             </Field>
             <Field name="description">
-              {({ input, meta }) => (
-                <div>
-                  <label>Description</label>
-                  <textarea {...input} type="text" placeholder="Description" />
-                </div>
+              {(data) => (
+                  createField(data, 'textarea', 'Description', false)
               )}
             </Field>
             <div className="buttons">
-              <button type="submit" disabled={pristine || submitting}>
+              <button type="submit" disabled={pristine || (submitErrors && submitting)}>
                 Submit
               </button>
-              <button
-                type="button"
-                onClick={cancelForm}
-              >
+              <button type="button" onClick={cancelForm}>
                 Cancel
               </button>
             </div>
+            {submitErrors && <div className="error">{submitErrors}</div>}
           </form>
-        )}
-      />
+        )}}
+      />)}
+    </MakeAsyncFunction>
   </Container>
   )
 }

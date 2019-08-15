@@ -8018,6 +8018,11 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
 
+react-redux-promise-listener@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-redux-promise-listener/-/react-redux-promise-listener-1.0.0.tgz#6dc3cbd0d1ec773cbcba246592f8ec1e6599f5ad"
+  integrity sha512-OjUpreMXexbWwxxiwk5J1IcbtZ41WsDv0EHuC0t+bOWAWM+nwtwLIq/ZwAVDbh0zamcZkK/XfG9yKWGXxZXzxA==
+
 react-redux@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.1.0.tgz#72af7cf490a74acdc516ea9c1dd80e25af9ea0b2"
@@ -8212,6 +8217,11 @@ redux-devtools-extension@^2.13.8:
   version "2.13.8"
   resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
   integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
+
+redux-promise-listener@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/redux-promise-listener/-/redux-promise-listener-1.1.1.tgz#b305c59dfcce0c092cfe0a38bbee5d6b5d05489d"
+  integrity sha512-xMoRAHMS0ehqHp02Vi/EPyuT/L+CE7hg0p1PB1FxMOexmqJ31qKkspdl4exrWDEg0Lj+yRQVBnHHeiL24E8zmw==
 
 redux-saga@^1.0.5:
   version "1.0.5"

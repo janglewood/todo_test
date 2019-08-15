@@ -8,7 +8,7 @@ import AddForm from './components/AddForm/AddForm';
 import Header from './components/Header/Header';
 import * as serviceWorker from './serviceWorker';
 import store, { history } from './store/configureStore';
-import { UserPage } from './components/UserPage/UserPage';
+import UserPage from './components/UserPage/UserPage';
 import './index.css';
 
 ReactDOM.render(
