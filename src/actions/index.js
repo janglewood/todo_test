@@ -1,29 +1,29 @@
 import {
-    ADD_TASK,
-    ADD_TASK_TO_STORE,
+    ADD_PROFILE,
+    ADD_PROFILE_TO_STORE,
     CANCEL_FORM,
     GO_TO_LINK,
     SUBMIT_FALSE,
     EDIT_PROFILE,
 } from './constants';
 
-export const addTask = (payload) => {
+export const addProfile = (payload) => {
     return {
-        type: ADD_TASK,
+        type: ADD_PROFILE,
         payload,
     }
 };
 
-export const editProfile = (payload) => {
+export const editProfile = (payload, data) => {
     return {
         type: EDIT_PROFILE,
-        payload,
+        payload: {payload, data}
     }
 }
 
-export const addTaskToStore = (value) => {
+export const addProfileToStore = (value) => {
     return {
-        type: ADD_TASK_TO_STORE,
+        type: ADD_PROFILE_TO_STORE,
         payload: value,
     }
 }

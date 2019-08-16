@@ -26,6 +26,11 @@ function App({ users }) {
                             users={users} 
                         />} 
                 />
+                <Route
+                    exact
+                    path='/edit/user/:userId/'
+                    render={(history) => <AddUserPage users={users} isEditing history={history} />} 
+                />
             </Switch>
         </ConnectedRouter>
     </div>

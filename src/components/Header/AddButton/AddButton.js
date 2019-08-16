@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './styled';
+import Button from '../../Button/styled';
 
 const AddButton = () => {
   return (

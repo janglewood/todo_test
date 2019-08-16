@@ -4,12 +4,17 @@ import AddButton from './AddButton/AddButton';
 import * as S from './styled';
 
 const Header = () => (
-    <S.Container>
-        <S.Title>To Do list</S.Title>
+    <>
+      <S.Container>
+        <S.Link to='/'>
+          <S.Title>Users list</S.Title>
+        </S.Link>
         <Link to='/form'>
-            <AddButton />
+          <AddButton />
         </Link>
-    </S.Container>
+      </S.Container>
+      <hr />
+    </>
 );
 
 export default Header;

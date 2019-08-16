@@ -1,42 +1,32 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
-import  { addTask, cancelForm } from '../../actions/index';
+import  { addProfile, cancelForm, editProfile } from '../../actions/index';
 import { Form, Field } from 'react-final-form';
 import Container from './styled';
 import { useSaga } from '../../hooks/useSaga';
 import { addFormFlowSaga } from '../../sagas/addFormSaga';
+import { editProfileSaga } from '../../sagas/editProfileSaga'
 import MakeAsyncFunction from 'react-redux-promise-listener'
 import { promiseListener } from '../../store/configureStore';
-import { ADD_TASK, SUBMIT_FALSE } from '../../actions/constants';
+import { ADD_PROFILE, SUBMIT_FALSE, EDIT_PROFILE } from '../../actions/constants';
+import InputField from './InputField/InputField';
+import formConfig from '../../configs/formConfig';
 
-const AddForm = (props) => {
-  const {cancelForm} = props;
-  useSaga(addFormFlowSaga);
-
-  const createField = ({ input, meta }, type, placeholder, isRequired, component) => {
-    return ( 
-      <div>
-        <label>{placeholder}</label>
-        {component === 'input' ? 
-          <input {...input} type={type} placeholder={placeholder} />
-          :
-          <textarea {...input} type={type} placeholder={placeholder} />
-        }
-        {isRequired ? meta.error && meta.touched && <span>{meta.error}</span> : null}
-      </div>
-      )                 
-  }
+const AddForm = ({ cancelForm , isEditing, editingUser, userId }) => {
+  useSaga(isEditing ? editProfileSaga : addFormFlowSaga);
 
   return (
     <Container>
       <MakeAsyncFunction
         listener={promiseListener}
-        start={ADD_TASK}
+        start={isEditing ? EDIT_PROFILE : ADD_PROFILE}
         resolve={SUBMIT_FALSE}
+        setPayload={(action, payload) => ({ ...action, payload, userId })}
       >{asyncFunc => ( 
       <Form
         onSubmit={asyncFunc}
+        initialValues={editingUser}
         validate={values => {
           const errors = {};
           if (!values.firstName) {
@@ -53,29 +43,22 @@ const AddForm = (props) => {
         render={({ handleSubmit, form, submitting, pristine, values, submitErrors }) => {
           return (
           <form onSubmit={handleSubmit}>
-            <Field name="firstName">
-              {(data) => (
-                createField(data, 'text', 'First name', true, 'input')
+            {formConfig.map(input => (
+              <Field name={input.name} key={input.name}>
+                {data => (
+                  <InputField
+                    data={data}
+                    type={input.type}
+                    placeholder={input.placeholder}
+                    isRequired={input.isRequired}
+                    component={input.component}
+                  />
               )}
-            </Field>
-            <Field name="lastName">
-              {(data) => (
-                createField(data, 'text', 'Last name', true, 'input')
-              )}
-            </Field>
-            <Field name="email">
-              {(data) => (
-                  createField(data, 'email', 'Email', true, 'input')
-              )}
-            </Field>
-            <Field name="description">
-              {(data) => (
-                  createField(data, 'textarea', 'Description', false)
-              )}
-            </Field>
+              </Field>
+            ))}
             <div className="buttons">
               <button type="submit" disabled={pristine || (submitErrors && submitting)}>
-                Submit
+                {isEditing ? 'Edit profile' : 'Add user'}
               </button>
               <button type="button" onClick={cancelForm}>
                 Cancel
@@ -91,8 +74,9 @@ const AddForm = (props) => {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  addTask: addTask,
+  addProfile: addProfile,
   cancelForm: cancelForm,
+  editProfile: editProfile,
 }, dispatch);
 
 export default connect(

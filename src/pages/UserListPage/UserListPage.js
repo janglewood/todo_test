@@ -6,8 +6,6 @@ import { connect } from  'react-redux';
 import { push } from 'connected-react-router'
 import * as S from './styled';
 
-const history = createBrowserHistory();
-
 const UserListPage = ({users, push}) => {
 	const goToUserPage = (index) => push(`user/${index + 1}`);
   return (
@@ -25,9 +23,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	push: push,
 }, dispatch);
 
-const mapStateToProps = store => {
+const mapStateToProps = state => {
 	return {
-		value: store.value,
+		value: state.value,
 	}
 }
 
