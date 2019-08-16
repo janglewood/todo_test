@@ -1,7 +1,6 @@
 import React from 'react';
-import Task from './Task/Task';
+import User from '../../components/User/User';
 import { createBrowserHistory } from 'history';
-import { Router } from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import { connect } from  'react-redux';
 import { push } from 'connected-react-router'
@@ -9,17 +8,16 @@ import * as S from './styled';
 
 const history = createBrowserHistory();
 
-const TaskContainer = ({tasks, push}) => {
+const UserListPage = ({users, push}) => {
+	const goToUserPage = (index) => push(`user/${index + 1}`);
   return (
-		<Router history={history}>
 			<ul>
-				{tasks.map((task, index) => {
-						return <S.ListItem key={index} onClick={() => push(`user/${index + 1}`)} >
-									<Task value={task} />
-								</S.ListItem>	
+				{users.map((user, index) => {
+						return 	<S.ListItem key={index} onClick={goToUserPage.bind(null, index)}>
+											<User user={user} />
+										</S.ListItem>	
 						})}
 				</ul>
-		</Router>
   )
 }
 
@@ -36,4 +34,4 @@ const mapStateToProps = store => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps,
-)(TaskContainer);
+)(UserListPage);

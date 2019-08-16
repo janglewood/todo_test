@@ -4,12 +4,13 @@ import { mockPostRequest } from '../utils/request';
 import { submitFalse, addTaskToStore } from '../actions';
 import { ADD_TASK, CANCEL_FORM } from '../actions/constants';
 
-function* handleSubmitAddForm() {
-    // const res = yield mockPostRequest();
-    // console.log(res);
-    // // yield put(push('/'));
+function* handleSubmitAddForm(formData) {
+    const res = yield mockPostRequest();
+    console.log(res);
+    yield put(addTaskToStore(formData)); 
+    yield put(push('/'));
 
-    throw new Error('Add form error');
+    // throw new Error('Add form error');
 }
 
 function* handleCancelFormSaga() {
@@ -24,9 +25,9 @@ export function* addFormFlowSaga() {
             cancelForm: take(CANCEL_FORM),
         });
         if (addTask) {
+            const formData = addTask.payload;
             try {
-                yield handleSubmitAddForm();
-                yield put(addTaskToStore()); 
+                yield handleSubmitAddForm(formData);
                 return;      
             } catch (err) {
                 console.error(err);

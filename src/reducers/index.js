@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { ADD_TASK, CANCEL_FORM } from '../actions/constants';
+import { ADD_TASK, CANCEL_FORM, ADD_TASK_TO_STORE } from '../actions/constants';
 
 export const initialState = {
-    tasks: [
+    users: [
         {
             firstName: 'Anton',
             lastName: 'Karatkevich',
@@ -21,8 +21,8 @@ export const initialState = {
 
 const formReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_TASK:
-            return {...state, tasks: [...state.tasks, action.payload]};
+        case ADD_TASK_TO_STORE:
+            return {...state, users: [...state.users, action.payload]};
         case CANCEL_FORM:
             return state;
         default:

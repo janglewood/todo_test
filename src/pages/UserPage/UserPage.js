@@ -7,18 +7,17 @@ import { push } from 'connected-react-router';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 
-const UserPage =  (props) => {
-    const { history, tasks, editProfile } = props;
+const UserPage = ({ history, users, editProfile }) => {
     const { params: { userId } } = history.match;
-    const userData = tasks.tasks[userId - 1];
+    const userData = users[userId - 1];
     useSaga(editProfileSaga);
-    return <S.Container>
+    return  <S.Container>
                 <h3>Name: {`${userData.firstName} ${userData.lastName}`}</h3>
                 <h5>Email: {userData.email}</h5>
                 <h5>Description: {userData.description || 'none'}</h5>
 
-                <button onClick={editProfile}>Edit profile</button>
-           </S.Container>
+                <button onClick={() => push(`/edit/`)}>Edit profile</button>
+              </S.Container>
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({

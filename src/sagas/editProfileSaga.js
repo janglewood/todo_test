@@ -17,5 +17,4 @@ export function* editProfileSaga() {
     if(editProfile) {
         yield handleEditButton();
     }
-
 }

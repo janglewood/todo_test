@@ -8,6 +8,7 @@ import { useSaga } from '../../hooks/useSaga';
 import { addFormFlowSaga } from '../../sagas/addFormSaga';
 import MakeAsyncFunction from 'react-redux-promise-listener'
 import { promiseListener } from '../../store/configureStore';
+import { ADD_TASK, SUBMIT_FALSE } from '../../actions/constants';
 
 const AddForm = (props) => {
   const {cancelForm} = props;
@@ -31,9 +32,8 @@ const AddForm = (props) => {
     <Container>
       <MakeAsyncFunction
         listener={promiseListener}
-        start='ADD_TASK'
-        resolve='ADD_TASK_TO_STORE'
-        reject='SUBMIT_FALSE'
+        start={ADD_TASK}
+        resolve={SUBMIT_FALSE}
       >{asyncFunc => ( 
       <Form
         onSubmit={asyncFunc}
