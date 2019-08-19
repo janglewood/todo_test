@@ -5,11 +5,11 @@ import { submitFalse } from '../actions/index';
 import { mockPostRequest } from '../utils/request';
 
 function* handleEditButton() {
-  // const res = yield mockPostRequest();
-  // console.log(res);
-  // yield put(push('/'));
+  const res = yield mockPostRequest();
+  console.log(res);
+  yield put(push('/'));
 
-  throw new Error('Add form error');
+  // throw new Error('Add form error');
 }
 
 function* handleCancelForm() {

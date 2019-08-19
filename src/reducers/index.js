@@ -8,20 +8,22 @@ import {
 } from '../actions/constants';
 
 export const initialState = {
-    users: [
-        {
-            firstName: 'Anton',
-            lastName: 'Karatkevich',
-            email: 'karatkevich.antony@gmail.com',
-            description: undefined,
-        },
-        {
-            firstName: 'Vasya',
-            lastName: 'Pupkin',
-            email: 'vasya@mail.com',
-            description: undefined,
-        }
-    ],
+    form : {
+        users: [
+            {
+                firstName: 'Anton',
+                lastName: 'Karatkevich',
+                email: 'karatkevich.antony@gmail.com',
+                description: undefined,
+            },
+            {
+                firstName: 'Vasya',
+                lastName: 'Pupkin',
+                email: 'vasya@mail.com',
+                description: undefined,
+            }
+        ],
+    }
 };
 
 const formReducer = (state = initialState, action) => {
@@ -36,7 +38,7 @@ const formReducer = (state = initialState, action) => {
             return {...state, users: editedUsers};
         case DELETE_PROFILE:
             const users = [...state.users];
-            users.splice(action.userId, 1);           
+            users.splice(action.payload, 1);           
             return {...state, users: users}; 
         default:
             return state;
