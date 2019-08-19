@@ -5,6 +5,7 @@ import {
     ADD_PROFILE_TO_STORE,
     EDIT_PROFILE,
     DELETE_PROFILE,
+    CHANGE_INPUT_VALUE
 } from '../actions/constants';
 
 export const initialState = {
@@ -21,8 +22,42 @@ export const initialState = {
                 lastName: 'Pupkin',
                 email: 'vasya@mail.com',
                 description: undefined,
-            }
+            },
+            {
+                firstName: 'Username',
+                lastName: 'Petrov',
+                email: 'pa@mail.com',
+                description: undefined,
+            },
+            {
+                firstName: 'Petya',
+                lastName: 'Ivanov',
+                email: 'ip@mail.com',
+                description: undefined,
+            },
+            {
+                firstName: 'Ivan',
+                lastName: 'Username',
+                email: 'iu@mail.com',
+                description: undefined,
+            },
+            {
+                firstName: 'Username1',
+                lastName: 'Username1',
+                email: 'i1@mail.com',
+                description: undefined,
+            },
         ],
+    },
+    searchValue: '',
+};
+
+const searchReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case CHANGE_INPUT_VALUE: 
+            return action.payload;
+        default: 
+            return state;
     }
 };
 
@@ -47,5 +82,6 @@ const formReducer = (state = initialState, action) => {
 
 export default (history) => combineReducers({
     form: formReducer,
+    searchValue: searchReducer,
     router: connectRouter(history),
 });

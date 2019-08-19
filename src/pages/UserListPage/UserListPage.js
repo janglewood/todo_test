@@ -1,27 +1,21 @@
 import React from 'react';
 import User from '../../components/User/User';
-import { connect } from  'react-redux';
+import { connect, useSelector } from  'react-redux';
 import * as S from './styled';
+import useSelectorHook from '../../hooks/useSelector';
 
-const UserListPage = ({ users }) => {
+const UserListPage = () => {
+	const users = useSelectorHook();
   return (
 		<ul>
 			{users.map((user, index) => {
-				return 	<S.ListItem key={index}>
-							<User user={user} index={index}/>
-						</S.ListItem>	
-				})}
+				return <S.ListItem key={index}>
+							 	<User user={user} index={index}/>
+						   </S.ListItem>	
+				})
+			}
 		</ul>
   )
 };
 
-const mapStateToProps = state => {
-	return {
-		value: state.value,
-	}
-};
-
-export default connect(
-	mapStateToProps,
-	null,
-)(UserListPage);
+export default UserListPage;

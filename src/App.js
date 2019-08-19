@@ -8,6 +8,7 @@ import Header from './components/Header/Header';
 import { history } from './store/configureStore';
 import UserPage from './pages/UserPage/UserPage';
 import AddUserPage from './pages/AddUserPage/AddUserPage';
+import { getAccordingProfiles } from './selectors/index';
 
 function App({ users }) {
   return (
@@ -37,10 +38,11 @@ function App({ users }) {
   );
 }
 
+
 const mapStateToProps = state => {
   return {
+    // users: getAccordingProfiles(state),
     users: state.form.users,
-    router: state.router,
   }
 };
 

@@ -5,6 +5,7 @@ import {
     SUBMIT_FALSE,
     EDIT_PROFILE,
     DELETE_PROFILE,
+    CHANGE_INPUT_VALUE,
 } from './constants';
 
 export const addProfile = (payload) => {
@@ -47,3 +48,10 @@ export const submitFalse = (payload) => {
         payload
     }
 };
+
+export const changeInputValue = (payload) => {
+    return {
+        type: CHANGE_INPUT_VALUE,
+        payload,
+    }
+}

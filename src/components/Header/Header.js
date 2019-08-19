@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import AddButton from './AddButton/AddButton';
+import SearchInput from '../SearchInput/SearchInput';
 import * as S from './styled';
 
 const Header = () => (
@@ -12,6 +13,7 @@ const Header = () => (
         <Link to='/form'>
           <AddButton />
         </Link>
+        <SearchInput />
       </S.Container>
       <hr />
     </>
