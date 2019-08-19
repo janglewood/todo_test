@@ -1,35 +1,34 @@
 import React from 'react';
 import User from '../../components/User/User';
-import { createBrowserHistory } from 'history';
-import {bindActionCreators} from 'redux';
 import { connect } from  'react-redux';
-import { push } from 'connected-react-router'
+import { deleteProfile } from '../../actions/index';
+import { bindActionCreators } from 'redux';
 import * as S from './styled';
 
-const UserListPage = ({users, push}) => {
-	const goToUserPage = (index) => push(`user/${index + 1}`);
+const UserListPage = ({ users, deleteProfile }) => {
   return (
-			<ul>
-				{users.map((user, index) => {
-						return 	<S.ListItem key={index} onClick={goToUserPage.bind(null, index)}>
-											<User user={user} />
-										</S.ListItem>	
-						})}
-				</ul>
+		<ul>
+			{users.map((user, index) => {
+				return 	<S.ListItem key={index}>
+									<User user={user} index={index}/>
+									<button onClick={() => deleteProfile(index)}>Delete</button>
+								</S.ListItem>	
+				})}
+		</ul>
   )
-}
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-	push: push,
-}, dispatch);
+};
 
 const mapStateToProps = state => {
 	return {
 		value: state.value,
 	}
-}
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+	deleteProfile: id => deleteProfile(id),
+}, dispatch);
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps,
+	mapDispatchToProps
 )(UserListPage);

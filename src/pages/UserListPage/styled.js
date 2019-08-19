@@ -6,5 +6,9 @@ export const ButtonLink = styled(Link)`
 `;
 
 export const ListItem = styled.li`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     list-style: none;
 `;

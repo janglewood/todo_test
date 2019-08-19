@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { CANCEL_FORM, ADD_PROFILE_TO_STORE, EDIT_PROFILE } from '../actions/constants';
+import { 
+    CANCEL_FORM,
+    ADD_PROFILE_TO_STORE,
+    EDIT_PROFILE,
+    DELETE_PROFILE,
+} from '../actions/constants';
 
 export const initialState = {
     users: [
@@ -29,6 +34,10 @@ const formReducer = (state = initialState, action) => {
             const editedUsers = [...state.users];
             editedUsers.splice(action.userId, 1, action.payload);           
             return {...state, users: editedUsers};
+        case DELETE_PROFILE:
+            const users = [...state.users];
+            users.splice(action.userId, 1);           
+            return {...state, users: users}; 
         default:
             return state;
     }
