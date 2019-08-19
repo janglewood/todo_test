@@ -12,5 +12,5 @@ export const useSaga = (saga, shouldCancel = true) => {
                 runningSaga.cancel();
             };
         }
-    }, []);
+    }, [saga, shouldCancel]);
 };

@@ -3,6 +3,7 @@ import { push } from 'connected-react-router'
 import { mockPostRequest } from '../utils/request';
 import { submitFalse, addProfileToStore } from '../actions';
 import { ADD_PROFILE, CANCEL_FORM } from '../actions/constants';
+import { FORM_ERROR } from 'final-form';
 
 function* handleSubmitAddForm(formData) {
   const res = yield mockPostRequest();
@@ -18,20 +19,23 @@ function* handleCancelFormSaga() {
 };
 
 export function* addFormFlowSaga() {
-  console.log('!!!!!!!!!!!!addFormFlowSaga');
   while(true) {
     const {addProfile, cancelForm} = yield race({
       addProfile: take(ADD_PROFILE),
       cancelForm: take(CANCEL_FORM),
     });
     if (addProfile) {
+      const {payload, resolve} = addProfile;
+      
       const formData = addProfile.payload;
       try {
-        yield handleSubmitAddForm(formData);
+        yield handleSubmitAddForm(payload);
+        resolve();
         return;      
       } catch (err) {
         console.error(err);
         yield put(submitFalse(err.message));
+        resolve({[FORM_ERROR]: err.message})
       }
     } else if (cancelForm) {
       yield handleCancelFormSaga();

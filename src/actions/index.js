@@ -7,10 +7,11 @@ import {
     DELETE_PROFILE,
 } from './constants';
 
-export const addProfile = (payload) => {
+export const addProfile = (payload, resolve) => {
     return {
         type: ADD_PROFILE,
         payload,
+        resolve,
     }
 };
 

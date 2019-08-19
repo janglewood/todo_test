@@ -8,20 +8,22 @@ import {
 } from '../actions/constants';
 
 export const initialState = {
-    users: [
-        {
-            firstName: 'Anton',
-            lastName: 'Karatkevich',
-            email: 'karatkevich.antony@gmail.com',
-            description: undefined,
-        },
-        {
-            firstName: 'Vasya',
-            lastName: 'Pupkin',
-            email: 'vasya@mail.com',
-            description: undefined,
-        }
-    ],
+    form: {
+        users: [
+            {
+                firstName: 'Anton',
+                lastName: 'Karatkevich',
+                email: 'karatkevich.antony@gmail.com',
+                description: undefined,
+            },
+            {
+                firstName: 'Vasya',
+                lastName: 'Pupkin',
+                email: 'vasya@mail.com',
+                description: undefined,
+            }
+        ],
+    }
 };
 
 const formReducer = (state = initialState, action) => {

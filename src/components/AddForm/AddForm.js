@@ -12,20 +12,20 @@ import { promiseListener } from '../../store/configureStore';
 import { ADD_PROFILE, SUBMIT_FALSE, EDIT_PROFILE } from '../../actions/constants';
 import InputField from './InputField/InputField';
 import formConfig from '../../configs/formConfig';
+import { mockPostRequest } from '../../utils/request';
+import { FORM_ERROR } from 'final-form';
 
-const AddForm = ({ cancelForm , isEditing, editingUser, userId }) => {
+const AddForm = ({ cancelForm , isEditing, editingUser, userId, addProfile }) => {
   useSaga(isEditing ? editProfileSaga : addFormFlowSaga);
 
   return (
     <Container>
-      <MakeAsyncFunction
-        listener={promiseListener}
-        start={isEditing ? EDIT_PROFILE : ADD_PROFILE}
-        resolve={SUBMIT_FALSE}
-        setPayload={(action, payload) => ({ ...action, payload, userId })}
-      >{asyncFunc => ( 
       <Form
-        onSubmit={asyncFunc}
+        onSubmit={values => {
+          return new Promise((resolve, reject) => {
+            addProfile(values, resolve)
+          }) 
+        }}
         initialValues={editingUser}
         validate={values => {
           const errors = {};
@@ -40,7 +40,9 @@ const AddForm = ({ cancelForm , isEditing, editingUser, userId }) => {
           }
           return errors;
         }}
-        render={({ handleSubmit, form, submitting, pristine, values, submitErrors }) => {
+        render={(props) => {
+          const  { handleSubmit, form, submitting, pristine, values, submitErrors } = props;
+          console.log(props)
           return (
           <form onSubmit={handleSubmit}>
             {formConfig.map(input => (
@@ -64,11 +66,10 @@ const AddForm = ({ cancelForm , isEditing, editingUser, userId }) => {
                 Cancel
               </button>
             </div>
-            {submitErrors && <div className="error">{submitErrors}</div>}
+            {submitErrors && <div className="error">{submitErrors[FORM_ERROR]}</div>}
           </form>
         )}}
-      />)}
-    </MakeAsyncFunction>
+      />
   </Container>
   )
 }
