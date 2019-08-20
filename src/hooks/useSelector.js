@@ -3,9 +3,10 @@ import { createSelector } from 'reselect';
 
 const useSelectorHook = () => {
     const selectedUsers = createSelector(
-        state => state,
-        state => state.form.users.filter(user => 
-                    user.firstName.toLowerCase().includes(state.searchValue),
+        state => state.form.users,
+        state => state.searchValue,
+        (users, searchValue) => users.filter(user => 
+                    user.firstName.toLowerCase().includes(searchValue),
         )
     );
     return useSelector(selectedUsers);
