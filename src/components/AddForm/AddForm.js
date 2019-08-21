@@ -29,11 +29,11 @@ const AddForm = ({ cancelForm , isEditing, editingUser, userId }) => {
         initialValues={editingUser}
         validate={values => {
           const errors = {};
-          if (!values.firstName) {
-            errors.firstName = 'Required';
+          if (!values.firstname) {
+            errors.firstname = 'Required';
           }
-          if (!values.lastName) {
-          errors.lastName = 'Required';
+          if (!values.lastname) {
+          errors.lastname = 'Required';
           }
           if (!values.email) {
             errors.email = 'Required';

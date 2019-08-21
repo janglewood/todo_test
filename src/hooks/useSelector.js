@@ -6,7 +6,7 @@ const useSelectorHook = () => {
         state => state.form.users,
         state => state.searchValue,
         (users, searchValue) => users.filter(user => 
-                    user.firstName.toLowerCase().includes(searchValue),
+                    user.firstname.toLowerCase().includes(searchValue),
         )
     );
     return useSelector(selectedUsers);

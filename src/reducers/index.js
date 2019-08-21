@@ -5,48 +5,49 @@ import {
     ADD_PROFILE_TO_STORE,
     EDIT_PROFILE,
     DELETE_PROFILE,
-    CHANGE_INPUT_VALUE
+    CHANGE_INPUT_VALUE,
+    GET_PROFILES
 } from '../actions/constants';
 
 export const initialState = {
     form : {
         users: [
-            {
-                firstName: 'Anton',
-                lastName: 'Karatkevich',
-                email: 'karatkevich.antony@gmail.com',
-                description: undefined,
-            },
-            {
-                firstName: 'Vasya',
-                lastName: 'Pupkin',
-                email: 'vasya@mail.com',
-                description: undefined,
-            },
-            {
-                firstName: 'Username',
-                lastName: 'Petrov',
-                email: 'pa@mail.com',
-                description: undefined,
-            },
-            {
-                firstName: 'Petya',
-                lastName: 'Ivanov',
-                email: 'ip@mail.com',
-                description: undefined,
-            },
-            {
-                firstName: 'Ivan',
-                lastName: 'Username',
-                email: 'iu@mail.com',
-                description: undefined,
-            },
-            {
-                firstName: 'Username1',
-                lastName: 'Username1',
-                email: 'i1@mail.com',
-                description: undefined,
-            },
+            // {
+            //     firstname: 'Anton',
+            //     lastname: 'Karatkevich',
+            //     email: 'karatkevich.antony@gmail.com',
+            //     description: undefined,
+            // },
+            // {
+            //     firstname: 'Vasya',
+            //     lastname: 'Pupkin',
+            //     email: 'vasya@mail.com',
+            //     description: undefined,
+            // },
+            // {
+            //     firstname: 'Username',
+            //     lastname: 'Petrov',
+            //     email: 'pa@mail.com',
+            //     description: undefined,
+            // },
+            // {
+            //     firstname: 'Petya',
+            //     lastname: 'Ivanov',
+            //     email: 'ip@mail.com',
+            //     description: undefined,
+            // },
+            // {
+            //     firstname: 'Ivan',
+            //     lastname: 'Username',
+            //     email: 'iu@mail.com',
+            //     description: undefined,
+            // },
+            // {
+            //     firstname: 'Username1',
+            //     lastname: 'Username1',
+            //     email: 'i1@mail.com',
+            //     description: undefined,
+            // },
         ],
     },
     searchValue: '',
@@ -65,16 +66,22 @@ const formReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_PROFILE_TO_STORE:
             return {...state, users: [...state.users, action.payload]};
-        case CANCEL_FORM:
-            return state;
         case EDIT_PROFILE:
             const editedUsers = [...state.users];
             editedUsers.splice(action.userId, 1, action.payload);           
             return {...state, users: editedUsers};
         case DELETE_PROFILE:
+            let userIndex;
+            [...state.users].forEach((user, index) => {
+                if (user.id === action.payload) {
+                    userIndex = index;
+                };
+            });
             const users = [...state.users];
-            users.splice(action.payload, 1);           
+            users.splice(userIndex, 1);           
             return {...state, users: users}; 
+        case GET_PROFILES:
+            return {...state, users: [...action.payload]}
         default:
             return state;
     }

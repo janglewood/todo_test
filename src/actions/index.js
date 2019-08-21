@@ -6,6 +6,7 @@ import {
     EDIT_PROFILE,
     DELETE_PROFILE,
     CHANGE_INPUT_VALUE,
+    GET_PROFILES,
 } from './constants';
 
 export const addProfile = (payload) => {
@@ -53,5 +54,12 @@ export const changeInputValue = (payload) => {
     return {
         type: CHANGE_INPUT_VALUE,
         payload,
+    }
+};
+
+export const getProfiles = (payload) => {
+    return {
+        type: GET_PROFILES,
+        payload, 
     }
 }

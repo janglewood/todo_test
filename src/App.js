@@ -8,9 +8,11 @@ import Header from './components/Header/Header';
 import { history } from './store/configureStore';
 import UserPage from './pages/UserPage/UserPage';
 import AddUserPage from './pages/AddUserPage/AddUserPage';
-import { getAccordingProfiles } from './selectors/index';
+import { getProfileSaga } from './sagas/getProfilesSaga';
+import { useSaga } from './hooks/useSaga';
 
 function App({ users }) {
+  useSaga(getProfileSaga);
   return (
     <div className="App">
       <ConnectedRouter history={history}>

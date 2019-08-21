@@ -5,3 +5,4 @@ export const SUBMIT_FALSE = 'SUBMIT_FALSE';
 export const EDIT_PROFILE = 'EDIT_PROFILE';
 export const DELETE_PROFILE = 'DELETE_PROFILE';
 export const CHANGE_INPUT_VALUE = 'CHANGE_INPUT_VALUE';
+export const GET_PROFILES = 'GET_PROFILES';

@@ -7,9 +7,11 @@ import Button from '../../components/Button/styled';
 
 const UserPage = ({ history, users, push }) => {
   const { params: { userId } } = history.match;
-  const userData = users[userId - 1];
+  const userData = users.find(user => {
+    return user.id === userId;
+  });
   return  <S.Container>
-            <h3>Name: {`${userData.firstName} ${userData.lastName}`}</h3>
+            <h3>Name: {`${userData.firstname} ${userData.lastname}`}</h3>
             <h5>Email: {userData.email}</h5>
             <h5>Description: {userData.description || 'none'}</h5>
 
