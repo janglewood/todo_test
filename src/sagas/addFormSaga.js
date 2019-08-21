@@ -5,10 +5,17 @@ import { submitFalse, addProfileToStore } from '../actions';
 import { ADD_PROFILE, CANCEL_FORM } from '../actions/constants';
 
 function* handleSubmitAddForm(formData) {
-  const res = yield mockPostRequest();
-  console.log(res);
-  yield put(addProfileToStore(formData)); 
-  yield put(push('/'));
+  console.log(formData);
+  const res = yield fetch('/form', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  });
+  if (res.status === 201) {
+    console.log('post');
+    yield put(addProfileToStore(formData)); 
+    yield put(push('/'));
+  } 
 
   // throw new Error('Add form error');
 }

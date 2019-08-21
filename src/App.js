@@ -18,12 +18,12 @@ function App({ users }) {
       <ConnectedRouter history={history}>
             <Header />
             <Switch>
-                <Route exact path="/" render={() => <UserListPage users={users} />} />
+                <Route exact path="/" render={() => <UserListPage />} />
                 <Route exact path="/form" component={AddUserPage} />
                 <Route
                     exact
                     path='/user/:userId/'
-                    render={(history) =>
+                    render={(history) => 
                         <UserPage
                             history={history}
                             users={users} 

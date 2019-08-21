@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { 
-    CANCEL_FORM,
+import {
     ADD_PROFILE_TO_STORE,
     EDIT_PROFILE,
     DELETE_PROFILE,
     CHANGE_INPUT_VALUE,
-    GET_PROFILES
+    GET_PROFILES,
+    GET_USER_DATA
 } from '../actions/constants';
 
 export const initialState = {
-    form : {
+    form: {
         users: [
             // {
             //     firstname: 'Anton',
@@ -55,9 +55,9 @@ export const initialState = {
 
 const searchReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CHANGE_INPUT_VALUE: 
+        case CHANGE_INPUT_VALUE:
             return action.payload;
-        default: 
+        default:
             return state;
     }
 };
@@ -65,11 +65,11 @@ const searchReducer = (state = initialState, action) => {
 const formReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_PROFILE_TO_STORE:
-            return {...state, users: [...state.users, action.payload]};
+            return { users: [...state.users, action.payload] };
         case EDIT_PROFILE:
             const editedUsers = [...state.users];
-            editedUsers.splice(action.userId, 1, action.payload);           
-            return {...state, users: editedUsers};
+            editedUsers.splice(action.userId, 1, action.payload);
+            return { users: editedUsers };
         case DELETE_PROFILE:
             let userIndex;
             [...state.users].forEach((user, index) => {
@@ -78,10 +78,20 @@ const formReducer = (state = initialState, action) => {
                 };
             });
             const users = [...state.users];
-            users.splice(userIndex, 1);           
-            return {...state, users: users}; 
+            users.splice(userIndex, 1);
+            return { ...state, users: users };
         case GET_PROFILES:
-            return {...state, users: [...action.payload]}
+            return { users: [...action.payload] };
+        case GET_USER_DATA:
+            return { 
+                users: state.users.map((user) => {
+                    if (user.id === action.payload[0].id) {
+                        return { ...action.payload[0] };
+                    } else {
+                        return user;
+                    }
+                })
+            };
         default:
             return state;
     }

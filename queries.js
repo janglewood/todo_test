@@ -30,12 +30,11 @@ const getUserById = (req, res) => {
 };
 
 const createUser = (req, res) => {
-    const { firstname, lastname, email, description } = req.query;
-    console.log(req.query);
+    const { firstname, lastname, email, description } = req.body;
 
     pool.query(
         'INSERT INTO profiles (firstname, lastname, email, description) VALUES ($1, $2, $3, $4)',
-        [firstname, lastname, email, description],
+        [firstname, lastname, email, description || 'none'],
         (err, result) => {
             if (err) {
                 throw new Error(err.message);
@@ -48,10 +47,9 @@ const updateUser = (req, res) => {
     const id = parseInt(req.params.id);
     const { firstname, lastname, email, description } = req.body;
 
-
     pool.query(
-        'UPDATE profiles SET firstname = $1, lastname = $2, email = $3, description = $4 WHERE id = $3',
-        [firstname, lastname, email, description],
+        'UPDATE profiles SET firstname = $1, lastname = $2, email = $3, description = $4 WHERE id = $5',
+        [firstname, lastname, email, description, id],
         (err, result) => {
             if (err) {
                 throw new Error(err.message);

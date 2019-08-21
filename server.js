@@ -12,9 +12,9 @@ app.use(
 );
 
 app.get('/api', db.getUsers);
-// app.get('/users/:id', db.getUserById);
+app.get('/user/:id', db.getUserById);
 app.post('/form', db.createUser);
-// app.put('/users/:id', db.updateUser);
+app.put('/edit/user/:id', db.updateUser);
 app.delete('/delete', db.deleteUser);
 
 app.listen(port, () => {

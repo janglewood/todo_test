@@ -1,10 +1,10 @@
 import {useEffect} from 'react';
 import store from '../store/configureStore';
 
-export const useSaga = (saga, shouldCancel = true) => {
+export const useSaga = (saga, params = [], shouldCancel = true) => {
     useEffect(() => {
         console.log('hi from saga');
-        const runningSaga = store.runSaga(saga);
+        const runningSaga = store.runSaga(saga, ...params);
 
         if (shouldCancel) {
             return () => {

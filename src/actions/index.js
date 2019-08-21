@@ -7,6 +7,7 @@ import {
     DELETE_PROFILE,
     CHANGE_INPUT_VALUE,
     GET_PROFILES,
+    GET_USER_DATA,
 } from './constants';
 
 export const addProfile = (payload) => {
@@ -62,4 +63,11 @@ export const getProfiles = (payload) => {
         type: GET_PROFILES,
         payload, 
     }
-}
+};
+
+export const getUserData = (payload) => {
+    return {
+        type: GET_USER_DATA,
+        payload,
+    }
+};
