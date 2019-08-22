@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import  { addProfile, cancelForm, editProfile } from '../../actions/index';
 import { Form, Field } from 'react-final-form';
 import Container from './styled';
-import { useSaga } from '../../hooks/useSaga';
-import { addFormFlowSaga } from '../../sagas/addFormSaga';
-import { editProfileSaga } from '../../sagas/editProfileSaga'
 import MakeAsyncFunction from 'react-redux-promise-listener'
 import { promiseListener } from '../../store/configureStore';
 import { ADD_PROFILE, SUBMIT_FALSE, EDIT_PROFILE } from '../../actions/constants';
@@ -14,7 +11,6 @@ import InputField from './InputField/InputField';
 import formConfig from '../../configs/formConfig';
 
 const AddForm = ({ cancelForm , isEditing, editingUser, userId }) => {
-  useSaga(isEditing ? editProfileSaga : addFormFlowSaga);
 
   return (
     <Container>
