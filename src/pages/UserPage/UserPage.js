@@ -4,12 +4,12 @@ import { push } from 'connected-react-router';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import Button from '../../components/Button/styled';
-import { getProfileSaga } from '../../sagas/getUserSaga';
+import { getUserSaga } from '../../sagas/getUserSaga';
 import { useSaga } from '../../hooks/useSaga';
 
 const UserPage = ({ history, users, push }) => {
   const { params: { userId } } = history.match;
-  useSaga(getProfileSaga, [userId]);
+  useSaga(getUserSaga, [userId]);
   const userData = users.find(user => {
     return user.id === Number(userId);
   });
