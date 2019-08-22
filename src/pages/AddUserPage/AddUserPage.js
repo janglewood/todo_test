@@ -1,18 +1,16 @@
 import React from 'react';
 import AddForm from '../../components/AddForm/AddForm';
+import useUserSelectorHook from '../../hooks/useUserSelector';
 
-const AddUserPage = ({ isEditing, users, history }) => {
+const AddUserPage = ({ isEditing, history }) => {
 	let userId = history.match ? history.match.params.userId : null;
-
-	const userData = users.find(user => {
-		return user.id === Number(userId);
-	  });
+	const userData = useUserSelectorHook(userId);
 	return (
-					<AddForm 
-						isEditing={isEditing}
-						editingUser={userData}
-						userId={userId}
-					/>
+		<AddForm
+			isEditing={isEditing}
+			editingUser={userData}
+			userId={userId}
+		/>
 	)
 }
 

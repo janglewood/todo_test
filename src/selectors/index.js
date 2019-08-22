@@ -9,6 +9,6 @@ export const getAccordingProfiles = createSelector(
     const result =  users.filter(user => 
         user.firstname.toLowerCase().includes(searchValue));
     console.log('!!!!!', result);
-    return result
+    return result;
   }
 );
