@@ -1,8 +1,8 @@
-import {useEffect} from 'react';
+import {useEffect, useMemo} from 'react';
 import store from '../store/configureStore';
 
 export const useSaga = (saga, params = [], shouldCancel = true) => {
-    useEffect(() => {
+    useMemo(() => {
         console.log('hi from saga');
         const runningSaga = store.runSaga(saga, ...params);
 

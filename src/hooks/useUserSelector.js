@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 
 const useUserSelectorHook = (id) => {
 	const accordingUser = createSelector(
-		state => state.form.users,
+		state => state.users.usersProfileData.data,
 		users => users.find(user =>
 			user.id === Number(id),
 		)
