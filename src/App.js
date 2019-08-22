@@ -10,6 +10,7 @@ import UserPage from './pages/UserPage/UserPage';
 import AddUserPage from './pages/AddUserPage/AddUserPage';
 import { getProfileSaga } from './sagas/getProfilesSaga';
 import { useSaga } from './hooks/useSaga';
+import useSelectorHook from './hooks/useSelector';
 
 function App() {
   useSaga(getProfileSaga);
@@ -27,5 +28,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

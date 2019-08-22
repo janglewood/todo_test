@@ -1,15 +1,15 @@
 import React from 'react';
 import * as S from './styled';
 import { push } from 'connected-react-router';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Button from '../../components/Button/styled';
 import { getUserSaga } from '../../sagas/getUserSaga';
 import { useSaga } from '../../hooks/useSaga';
 import useUserSelectorHook from '../../hooks/useUserSelector';
 
-const UserPage = ({ match, push }) => {
+const UserPage = ({ match }) => {
   const { params: { userId } } = match;
+  const dispatch = useDispatch();
   useSaga(getUserSaga, [userId]);
   const userData = useUserSelectorHook(userId);
   return <S.Container>
@@ -17,15 +17,9 @@ const UserPage = ({ match, push }) => {
     <h5>Email: {userData.email}</h5>
     <h5>Description: {userData.description || 'none'}</h5>
 
-    <Button onClick={() => push(`/edit/user/${userId}`)}>Edit profile</Button>
+    <Button onClick={() => dispatch(push(`/edit/user/${userId}`))}>Edit profile</Button>
   </S.Container>
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  push: push,
-}, dispatch);
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(UserPage);
+export default UserPage;
