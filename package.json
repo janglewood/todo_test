@@ -5,9 +5,7 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "connected-react-router": "^6.5.2",
-    "express": "^4.17.1",
     "final-form": "^4.18.4",
-    "pg": "^7.12.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-final-form": "^6.3.0",
@@ -25,12 +23,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "client": "yarn start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,8 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^4.1.2"
   }
 }
