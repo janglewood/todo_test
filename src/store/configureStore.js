@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer, { initialState } from '../reducers/index';
+import rootReducer from '../reducers/index';
 import createSagaMiddleware from 'redux-saga';
 // import {rootSaga} from '../sagas';
+import { userInitialState } from '../reducers/userReducer';
 import createReduxPromiseListener from 'redux-promise-listener';
 import { createBrowserHistory } from 'history';
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -21,6 +22,11 @@ const enhancer = compose(
         ),
     composeWithDevTools(),
 );
+
+const initialState = {
+    users: userInitialState,
+    searchValue: '',
+};
 
 const store = createStore(
     rootReducer(history),

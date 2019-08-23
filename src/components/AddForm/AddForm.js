@@ -1,7 +1,6 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
-import { connect } from 'react-redux';
-import  { addProfile, cancelForm, editProfile } from '../../actions/index';
+// import { useDispatch } from 'react-redux';
+import  { cancelForm } from '../../actions/index';
 import { Form, Field } from 'react-final-form';
 import Container from './styled';
 import MakeAsyncFunction from 'react-redux-promise-listener'
@@ -9,9 +8,12 @@ import { promiseListener } from '../../store/configureStore';
 import { ADD_PROFILE, SUBMIT_FALSE, EDIT_PROFILE } from '../../actions/constants';
 import InputField from './InputField/InputField';
 import formConfig from '../../configs/formConfig';
+import { useActions } from '../../hooks/useActions';
 
-const AddForm = ({ cancelForm , isEditing, editingUser, userId }) => {
-
+const AddForm = ({ isEditing, editingUser, userId }) => {
+  const actions = useActions({
+    'cancelForm': cancelForm,
+  });
   return (
     <Container>
       <MakeAsyncFunction
@@ -56,7 +58,7 @@ const AddForm = ({ cancelForm , isEditing, editingUser, userId }) => {
               <button type="submit" disabled={pristine || (submitErrors && submitting)}>
                 {isEditing ? 'Edit profile' : 'Add user'}
               </button>
-              <button type="button" onClick={cancelForm}>
+              <button type="button" onClick={actions.cancelForm}>
                 Cancel
               </button>
             </div>
@@ -69,13 +71,10 @@ const AddForm = ({ cancelForm , isEditing, editingUser, userId }) => {
   )
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  addProfile: addProfile,
-  cancelForm: cancelForm,
-  editProfile: editProfile,
-}, dispatch);
+// const mapDispatchToProps = dispatch => bindActionCreators({
+//   addProfile: addProfile,
+//   cancelForm: cancelForm,
+//   editProfile: editProfile,
+// }, dispatch);
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(AddForm);
+export default AddForm;

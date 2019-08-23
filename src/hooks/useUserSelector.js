@@ -1,14 +1,7 @@
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import { getUserById } from '../selectors/index';
 
 const useUserSelectorHook = (id) => {
-	const accordingUser = createSelector(
-		state => state.users.usersProfileData.data,
-		users => users.find(user =>
-			user.id === Number(id),
-		)
-	);
-	return useSelector(accordingUser);
+	return useSelector(getUserById(id));
 }
-
 export default useUserSelectorHook;

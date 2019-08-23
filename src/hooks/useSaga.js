@@ -1,4 +1,4 @@
-import {useEffect, useMemo} from 'react';
+import {/*useEffect*/ useMemo} from 'react';
 import store from '../store/configureStore';
 
 export const useSaga = (saga, params = [], shouldCancel = true) => {

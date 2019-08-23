@@ -2,14 +2,16 @@ import React from 'react';
 import User from '../../components/User/User';
 import * as S from './styled';
 import useSelectorHook from '../../hooks/useSelector';
-import { getProfileSaga } from '../../sagas/getProfilesSaga';
+import { getProfilesSaga } from '../../sagas/getProfilesSaga';
+import { deleteProfileSaga } from '../../sagas/deleteProfileSaga';
 import { useSaga } from '../../hooks/useSaga';
 import { useSelector } from 'react-redux';
 import { css } from '@emotion/core';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 const UserListPage = () => {
-	useSaga(getProfileSaga);
+	useSaga(getProfilesSaga);
+	useSaga(deleteProfileSaga);
 	const isLoading = useSelector(state => state.users.usersListData.isLoading);
 	const users = useSelectorHook();
 	const override = css`

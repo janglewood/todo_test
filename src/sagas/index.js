@@ -4,9 +4,5 @@ import {addFormFlowSaga} from './addFormSaga';
 import {getProfileSaga} from './getProfilesSaga';
 
 export function* rootSaga() {
-    yield all([
-        editProfileSaga(),
-        addFormFlowSaga(),
-        getProfileSaga(),
-    ]);
+    yield all([]);
 }

@@ -1,11 +1,9 @@
 import {put, race, take} from 'redux-saga/effects';
 import { push } from 'connected-react-router'
-import { mockPostRequest } from '../utils/request';
-import { submitFalse, addProfileToStore } from '../actions';
+import { submitFalse } from '../actions';
 import { ADD_PROFILE, CANCEL_FORM } from '../actions/constants';
 
 function* handleSubmitAddForm(formData) {
-  console.log(formData);
   const res = yield fetch('/form', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
@@ -13,10 +11,8 @@ function* handleSubmitAddForm(formData) {
   });
   if (res.status === 201) {
     console.log('post');
-    yield put(addProfileToStore(formData)); 
     yield put(push('/'));
   } 
-
   // throw new Error('Add form error');
 }
 
