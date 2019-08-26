@@ -16,7 +16,7 @@ export const getProfilesBySearchValue = createSelector(
 export const getUserById = (id) => createSelector(
   [getUsersProfiles],
   users => {
-    const result = users.find(user =>
+    const result = [users].find(user => //express backend return array, loopback return object
       user.id === Number(id)
     )
     return result;

@@ -9,7 +9,7 @@ function* handleSubmitAddForm(formData) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
   });
-  if (res.status === 201) {
+  if (res.status === 200) {
     console.log('post');
     yield put(push('/'));
   } 

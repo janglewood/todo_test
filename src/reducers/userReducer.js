@@ -1,5 +1,5 @@
 import {
-    DELETE_PROFILE,
+    DELETE_PROFILE_FROM_STORE,
     SET_PROFILES,
     SET_USER_DATA,
     SET_IS_USER_LOADING,
@@ -19,7 +19,7 @@ export const userInitialState = {
 
 const userReducer = (state = userInitialState, action) => {
     switch (action.type) {
-        case DELETE_PROFILE:
+        case DELETE_PROFILE_FROM_STORE:
             let userIndex;
             [...state.usersListData.data].forEach((user, index) => {
                 if (user.id === action.payload) {

@@ -4,10 +4,11 @@ import {
     CANCEL_FORM,
     SUBMIT_FALSE,
     EDIT_PROFILE,
-    DELETE_PROFILE,
+    START_DELETE_PROFILE,
     CHANGE_INPUT_VALUE,
     SET_PROFILES,
     SET_USER_DATA,
+    DELETE_PROFILE_FROM_STORE,
 } from './constants';
 
 export const addProfile = (payload) => {
@@ -20,13 +21,19 @@ export const addProfile = (payload) => {
 export const editProfile = (payload, data) => {
     return {
         type: EDIT_PROFILE,
-        payload: {payload, data}
+        payload: { payload, data }
     }
 };
 
 export const deleteProfile = (payload) => {
     return {
-        type: DELETE_PROFILE,
+        type: START_DELETE_PROFILE,
+        payload
+    }
+};
+export const deleteProfileFromStore = (payload) => {
+    return {
+        type: DELETE_PROFILE_FROM_STORE,
         payload
     }
 };
@@ -61,7 +68,7 @@ export const changeInputValue = (payload) => {
 export const getProfiles = (payload) => {
     return {
         type: SET_PROFILES,
-        payload, 
+        payload,
     }
 };
 

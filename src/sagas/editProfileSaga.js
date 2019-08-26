@@ -9,10 +9,9 @@ function* handleEditButton(editedData) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(editedData),
   });
-  if (res.status === 200) {
+  if (res.status === 204) {
     yield put(push('/'));
   } 
-
   // throw new Error('Add form error');
 }
 
