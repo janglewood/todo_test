@@ -1,5 +1,5 @@
 import { put } from 'redux-saga/effects';
-import { getProfiles} from '../actions/index';
+import { getProfiles } from '../actions/index';
 import { setIsProfilesLoading } from '../actions/isLoading';
 
 export function* getProfilesSaga() {

@@ -8,6 +8,7 @@ import {
     CHANGE_INPUT_VALUE,
     SET_PROFILES,
     SET_USER_DATA,
+    REGISTER_USER
 } from './constants';
 
 export const addProfile = (payload) => {
@@ -69,5 +70,12 @@ export const getUserData = (payload) => {
     return {
         type: SET_USER_DATA,
         payload,
+    }
+};
+
+export const userRegistration = (payload) => {
+    return {
+        type: REGISTER_USER,
+        payload
     }
 };
