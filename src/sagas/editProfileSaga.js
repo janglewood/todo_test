@@ -4,7 +4,7 @@ import { EDIT_PROFILE, CANCEL_FORM } from '../actions/constants';
 import { submitFalse } from '../actions/index';
 
 function* handleEditButton(editedData, token) {
-  const res = yield fetch(`/edit/user/${editedData.id}`, {
+  const res = yield fetch(`/user/${editedData.id}`, {
     method: 'put',
     headers: { 'Content-Type': 'application/json', 'Authorization': `bearer ${token}` },
     body: JSON.stringify(editedData),

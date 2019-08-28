@@ -19,7 +19,7 @@ const enhancer = compose(
         sagaMiddleware,
         routerMiddleware(history),
         reduxPromiseListener.middleware,
-        ),
+    ),
     composeWithDevTools(),
 );
 

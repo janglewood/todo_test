@@ -5,7 +5,7 @@ import { setIsProfilesLoading } from '../actions/isLoading';
 export function* getProfilesSaga(token) {
     yield put(setIsProfilesLoading(true));
     console.log('getProfileSaga works here');
-    const res = yield fetch('/api', {
+    const res = yield fetch('/users', {
         method: 'get',
         headers: { 'Content-Type': 'application/json', 'Authorization': `bearer ${token}` },
     });
