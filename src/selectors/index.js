@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 const getSearchValue = state => state.searchValue;
 const getUsersList = state => state.users.usersListData.data;
 const getUsersProfiles = state => state.users.usersProfileData.data;
+const getCurrentSession = state => state.currentSession;
 
 export const getProfilesBySearchValue = createSelector(
   [getUsersList, getSearchValue],
@@ -21,4 +22,9 @@ export const getUserById = (id) => createSelector(
     )
     return result;
   }
+);
+
+export const getCurrentSessionState = () => createSelector(
+  [getCurrentSession], 
+  session => session,
 );

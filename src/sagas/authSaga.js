@@ -1,20 +1,35 @@
 import { put, race, take } from 'redux-saga/effects';
 import { push } from 'connected-react-router'
-import { registerUser } from '../actions';
-import { REGISTER_USER } from '../actions/constants';
+import { addTokenToStore } from '../actions';
+import { REGISTER_USER, LOGIN_USER } from '../actions/constants';
 
 function* handleRegisterForm(userData) {
-  const res = yield fetch('/register', {
+  const request = yield fetch('/register', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   });
-  if (res.status === 200) {
-    console.log('post');
+  if (request.status === 200) {
+    const data = yield request.json();
+    yield put(addTokenToStore(data));
     yield put(push('/'));
   }
   // throw new Error('Add form error');
-}
+};
+
+function* handleLoginForm(userData) {
+  const request = yield fetch('/login', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData),
+  });
+  if (request.status === 200) {
+    const data = yield request.json();
+    yield put(addTokenToStore(data));
+    yield put(push('/'));
+  }
+  // throw new Error('Add form error');
+};
 
 function* handleCancelFormSaga() {
   yield put(push('/'));
@@ -22,14 +37,21 @@ function* handleCancelFormSaga() {
 
 export function* authSaga() {
   while (true) {
-    const { registerUser, cancelForm } = yield race({
+    const { registerUser, loginUser } = yield race({
       registerUser: take(REGISTER_USER),
-      // cancelForm: take(CANCEL_FORM),
+      loginUser: take(LOGIN_USER),
     });
     if (registerUser) {
       const userData = registerUser.payload;
       try {
         yield handleRegisterForm(userData);
+      } catch (err) {
+        console.error(err);
+      }
+    } else if (loginUser) {
+      const userData = loginUser.payload;
+      try {
+        yield handleLoginForm(userData);
       } catch (err) {
         console.error(err);
       }

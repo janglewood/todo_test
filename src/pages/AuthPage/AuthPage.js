@@ -6,10 +6,10 @@ import AuthForm from '../../components/AuthForm/AuthForm';
 import { useSaga } from '../../hooks/useSaga';
 import { authSaga } from '../../sagas/authSaga';
 
-const AuthPage = () => {
+const AuthPage = ({isLogin}) => {
   useSaga(authSaga);
   return (
-    <AuthForm />
+    <AuthForm isLogin={isLogin}/>
   )
 };
 

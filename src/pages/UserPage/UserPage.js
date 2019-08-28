@@ -8,11 +8,13 @@ import { useSaga } from '../../hooks/useSaga';
 import useUserSelectorHook from '../../hooks/useUserSelector';
 import { css } from '@emotion/core';
 import ClipLoader from 'react-spinners/ClipLoader';
+import useCurrentSessionHook from '../../hooks/useCurrentSession';
 
 const UserPage = ({ match }) => {
   const { params: { userId } } = match;
-  const dispatch = useDispatch();
-  useSaga(getUserSaga, [userId]);
+	const dispatch = useDispatch();
+	const { token } = useCurrentSessionHook();
+  useSaga(getUserSaga, [userId, token]);
   const userData = useUserSelectorHook(userId);
   const isLoading = useSelector(state => state.users.usersProfileData.isLoading);
   const override = css`

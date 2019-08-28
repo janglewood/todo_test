@@ -8,23 +8,25 @@ import { history } from './store/configureStore';
 import UserPage from './pages/UserPage/UserPage';
 import AddUserPage from './pages/AddUserPage/AddUserPage';
 import AuthPage from './pages/AuthPage/AuthPage';
+import useCurrentSessionHook from './hooks/useCurrentSession';
 
-function App() {
+const App = () => {
+  const session = useCurrentSessionHook();
   return (
     <div className="App">
       <ConnectedRouter history={history}>
-        <Header />
+        <Header session={session} />
         <Switch>
           <Route exact path="/" component={UserListPage} />
           <Route exact path="/form" component={AddUserPage} />
           <Route exact path='/user/:userId/' component={UserPage} />
           <Route exact path='/edit/user/:userId/' render={(history) => <AddUserPage isEditing history={history} />} />
           <Route exact path='/register' component={AuthPage} />
+          <Route exact path='/login' render={() => <AuthPage isLogin />} />
         </Switch>
       </ConnectedRouter>
     </div>
   );
 }
-
 
 export default App;

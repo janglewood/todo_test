@@ -8,7 +8,9 @@ import {
     CHANGE_INPUT_VALUE,
     SET_PROFILES,
     SET_USER_DATA,
-    REGISTER_USER
+    REGISTER_USER,
+    LOGIN_USER,
+    ADD_TOKEN_TO_STORE,
 } from './constants';
 
 export const addProfile = (payload) => {
@@ -21,7 +23,7 @@ export const addProfile = (payload) => {
 export const editProfile = (payload, data) => {
     return {
         type: EDIT_PROFILE,
-        payload: {payload, data}
+        payload: { payload, data }
     }
 };
 
@@ -62,7 +64,7 @@ export const changeInputValue = (payload) => {
 export const getProfiles = (payload) => {
     return {
         type: SET_PROFILES,
-        payload, 
+        payload,
     }
 };
 
@@ -76,6 +78,20 @@ export const getUserData = (payload) => {
 export const userRegistration = (payload) => {
     return {
         type: REGISTER_USER,
+        payload
+    }
+};
+
+export const userLogin = (payload) => {
+    return {
+        type: LOGIN_USER,
+        payload
+    }
+};
+
+export const addTokenToStore = (payload) => {
+    return {
+        type: ADD_TOKEN_TO_STORE,
         payload
     }
 };
