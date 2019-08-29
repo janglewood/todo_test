@@ -8,12 +8,10 @@ import { useSaga } from '../../hooks/useSaga';
 import { useSelector } from 'react-redux';
 import { css } from '@emotion/core';
 import ClipLoader from 'react-spinners/ClipLoader';
-import useCurrentSessionHook from '../../hooks/useCurrentSession';
 
 const UserListPage = () => {
-	const { token } = useCurrentSessionHook();
-	useSaga(getProfilesSaga, [token]);
-	useSaga(deleteProfileSaga, [token]);
+	useSaga(getProfilesSaga);
+	useSaga(deleteProfileSaga);
 	const isLoading = useSelector(state => state.users.usersListData.isLoading);
 	const users = useSelectorHook();
 	const override = css`

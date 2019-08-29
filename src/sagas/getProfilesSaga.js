@@ -1,8 +1,12 @@
-import { put } from 'redux-saga/effects';
+import { put, take, select } from 'redux-saga/effects';
 import { getProfiles } from '../actions/index';
 import { setIsProfilesLoading } from '../actions/isLoading';
+import { REHYDRATE } from 'redux-persist';
+import { getCurrentSessionState } from '../selectors';
 
-export function* getProfilesSaga(token) {
+export function* getProfilesSaga() {
+    yield take(REHYDRATE);
+    const { token } = yield select(getCurrentSessionState());
     yield put(setIsProfilesLoading(true));
     console.log('getProfileSaga works here');
     const res = yield fetch('/users', {

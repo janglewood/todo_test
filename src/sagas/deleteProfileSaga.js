@@ -1,7 +1,9 @@
-import { takeEvery } from 'redux-saga/effects';
+import { takeEvery, select } from 'redux-saga/effects';
 import { DELETE_PROFILE } from '../actions/constants';
+import useCurrentSessionHook from '../hooks/useCurrentSession';
 
-function* deleteP({ payload }, token) {
+function* deleteP({ payload }) {
+    const { token } = select(useCurrentSessionHook);
     const request = yield fetch('/users', {
         method: 'delete',
         headers: { 'Content-Type': 'application/json', 'Authorization': `bearer ${token}` },

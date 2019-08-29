@@ -4,6 +4,7 @@ import { submitFalse } from '../actions';
 import { ADD_PROFILE, CANCEL_FORM } from '../actions/constants';
 
 function* handleSubmitAddForm(formData, token) {
+  console.log('handleSubmitAddForm')
   const res = yield fetch('/users', {
     method: 'post',
     headers: { 'Content-Type': 'application/json', 'Authorization': `bearer ${token}` },

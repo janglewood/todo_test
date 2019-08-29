@@ -10,6 +10,7 @@ import {
     SET_USER_DATA,
     REGISTER_USER,
     LOGIN_USER,
+    LOGOUT_USER,
     ADD_TOKEN_TO_STORE,
 } from './constants';
 
@@ -86,6 +87,12 @@ export const userLogin = (payload) => {
     return {
         type: LOGIN_USER,
         payload
+    }
+};
+
+export const userLogout = () => {
+    return {
+        type: LOGOUT_USER,
     }
 };
 

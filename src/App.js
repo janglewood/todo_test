@@ -9,8 +9,13 @@ import UserPage from './pages/UserPage/UserPage';
 import AddUserPage from './pages/AddUserPage/AddUserPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import useCurrentSessionHook from './hooks/useCurrentSession';
+import { useSaga } from './hooks/useSaga';
+import { authSaga } from './sagas/authSaga';
+import { redirectSaga } from './sagas/redirectSaga';
 
 const App = () => {
+  useSaga(authSaga);
+  useSaga(redirectSaga, [history]);
   const session = useCurrentSessionHook();
   return (
     <div className="App">
@@ -27,6 +32,6 @@ const App = () => {
       </ConnectedRouter>
     </div>
   );
-}
+};
 
 export default App;

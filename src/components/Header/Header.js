@@ -1,11 +1,14 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import AddButton from './AddButton/AddButton';
 import SearchInput from '../SearchInput/SearchInput';
 import * as S from './styled';
 import SessionInfo from '../Header/SessionInfo/SessionInfo';
+import { userLogout } from '../../actions';
 
 const Header = ({ session }) => {
+  const dispatch = useDispatch();
   return (
     <>
       <S.Container>
@@ -20,7 +23,9 @@ const Header = ({ session }) => {
               </Link>
             ) : null}
             <SearchInput />
-            <SessionInfo session={session} />
+            <button onClick={() => dispatch(userLogout())}>
+              <SessionInfo session={session} />
+            </button>
           </>
         ) : null}
       </S.Container>

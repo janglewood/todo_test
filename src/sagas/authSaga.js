@@ -1,7 +1,8 @@
 import { put, race, take } from 'redux-saga/effects';
 import { push } from 'connected-react-router'
 import { addTokenToStore } from '../actions';
-import { REGISTER_USER, LOGIN_USER } from '../actions/constants';
+import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from '../actions/constants';
+import { persistor } from '../store/configureStore';
 
 function* handleRegisterForm(userData) {
   const request = yield fetch('/register', {
@@ -31,15 +32,17 @@ function* handleLoginForm(userData) {
   // throw new Error('Add form error');
 };
 
-function* handleCancelFormSaga() {
-  yield put(push('/'));
+function* handleLogout() {
+  yield persistor.purge();
+  yield put(push('/login'));
 };
 
 export function* authSaga() {
   while (true) {
-    const { registerUser, loginUser } = yield race({
+    const { registerUser, loginUser, logoutUser } = yield race({
       registerUser: take(REGISTER_USER),
       loginUser: take(LOGIN_USER),
+      logoutUser: take(LOGOUT_USER)
     });
     if (registerUser) {
       const userData = registerUser.payload;
@@ -55,6 +58,8 @@ export function* authSaga() {
       } catch (err) {
         console.error(err);
       }
+    } else if (logoutUser) {
+      yield handleLogout();
     }
   }
 }
