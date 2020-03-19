@@ -20,6 +20,7 @@ const AddForm = ({ isEditing, editingUser, userId }) => {
         listener={promiseListener}
         start={isEditing ? EDIT_PROFILE : ADD_PROFILE}
         resolve={SUBMIT_FALSE}
+        reject={(err) => console.log(err)}
         setPayload={(action, payload) => ({ ...action, payload, userId })}
       >{asyncFunc => (
         <Form

@@ -1,18 +1,19 @@
-import {put, race, take} from 'redux-saga/effects';
+import { put, race, take } from 'redux-saga/effects';
 import { push } from 'connected-react-router'
 import { submitFalse } from '../actions';
 import { ADD_PROFILE, CANCEL_FORM } from '../actions/constants';
 
-function* handleSubmitAddForm(formData) {
-  const res = yield fetch('/form', {
+function* handleSubmitAddForm(formData, token) {
+  console.log('handleSubmitAddForm')
+  const res = yield fetch('/users', {
     method: 'post',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `bearer ${token}` },
     body: JSON.stringify(formData),
   });
   if (res.status === 200) {
     console.log('post');
     yield put(push('/'));
-  } 
+  }
   // throw new Error('Add form error');
 }
 
@@ -20,18 +21,17 @@ function* handleCancelFormSaga() {
   yield put(push('/'));
 };
 
-export function* addFormFlowSaga() {
-  console.log('!!!!!!!!!!!!addFormFlowSaga');
-  while(true) {
-    const {addProfile, cancelForm} = yield race({
+export function* addFormFlowSaga(token) {
+  while (true) {
+    const { addProfile, cancelForm } = yield race({
       addProfile: take(ADD_PROFILE),
       cancelForm: take(CANCEL_FORM),
     });
     if (addProfile) {
       const formData = addProfile.payload;
       try {
-        yield handleSubmitAddForm(formData);
-        return;      
+        yield handleSubmitAddForm(formData, token);
+        return;
       } catch (err) {
         console.error(err);
         yield put(submitFalse(err.message));
@@ -39,6 +39,6 @@ export function* addFormFlowSaga() {
     } else if (cancelForm) {
       yield handleCancelFormSaga();
       return;
-    };   
-  } 
+    };
+  }
 }

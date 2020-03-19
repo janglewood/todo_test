@@ -35,7 +35,7 @@ const userReducer = (state = userInitialState, action) => {
         case SET_PROFILES:
             return { ...state, usersListData: { ...state.usersListData, data: action.payload } };
         case SET_USER_DATA:
-            return { ...state, usersProfileData: { ...state.usersProfileData, data: action.payload } }; // refactor
+            return { ...state, usersProfileData: { ...state.usersProfileData, data: action.payload } };
         case SET_IS_USER_LOADING:
             return { ...state, usersProfileData: { ...state.usersProfileData, isLoading: action.isLoading, } };
         case SET_IS_PROFILES_LOADING:

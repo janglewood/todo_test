@@ -18,7 +18,7 @@ const UserListPage = () => {
 		border-color: red;
 	`;
 	if (isLoading) {
-		return ( 
+		return (
 			<ClipLoader
 				css={override}
 				sizeUnit={"px"}

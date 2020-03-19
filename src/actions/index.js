@@ -9,6 +9,10 @@ import {
     SET_PROFILES,
     SET_USER_DATA,
     DELETE_PROFILE_FROM_STORE,
+    REGISTER_USER,
+    LOGIN_USER,
+    LOGOUT_USER,
+    ADD_TOKEN_TO_STORE,
 } from './constants';
 
 export const addProfile = (payload) => {
@@ -76,5 +80,32 @@ export const getUserData = (payload) => {
     return {
         type: SET_USER_DATA,
         payload,
+    }
+};
+
+export const userRegistration = (payload) => {
+    return {
+        type: REGISTER_USER,
+        payload
+    }
+};
+
+export const userLogin = (payload) => {
+    return {
+        type: LOGIN_USER,
+        payload
+    }
+};
+
+export const userLogout = () => {
+    return {
+        type: LOGOUT_USER,
+    }
+};
+
+export const addTokenToStore = (payload) => {
+    return {
+        type: ADD_TOKEN_TO_STORE,
+        payload
     }
 };
