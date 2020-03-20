@@ -1,0 +1,34 @@
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.18
+jobs:
+  build:
+    working_directory: ~/aws_test
+    docker:
+      - image: node:10.15.3
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  deploy:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - aws-cli/setup:
+          profile-name: default
+      - run: aws s3 sync ./public/ s3://awssaintbucket
+      
+workflows:
+    build:
+      jobs:
+        - build
+        - deploy:
+            requires: 
+              - build
