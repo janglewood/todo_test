@@ -1,4 +1,4 @@
-import { put, select, take, cancel } from 'redux-saga/effects';
+import { put, select, take } from 'redux-saga/effects';
 import { push } from 'connected-react-router'
 import { getCurrentSessionState } from '../selectors';
 import { REHYDRATE } from 'redux-persist';

@@ -1,8 +1,6 @@
 import React from 'react';
-import { render } from 'react-dom';
 import S from './styled';
 import { Form, Field } from 'react-final-form';
-import { FORM_ERROR } from 'final-form';
 import { useDispatch } from 'react-redux';
 import { userRegistration, userLogin } from '../../actions';
 import InputField from '../AddForm/InputField/InputField';
