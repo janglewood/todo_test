@@ -3,13 +3,13 @@ orbs:
   aws-cli: circleci/aws-cli@0.1.18
 jobs:
   build:
-    working_directory: ~/aws_test
+    working_directory: ~/todo_test
     docker:
       - image: node:10.15.3
     steps:
       - checkout
-      - run: npm install
-      - run: npm run build
+      - run: yarn install
+      - run: yarn build
       - persist_to_workspace:
           root: .
           paths:
@@ -23,7 +23,7 @@ jobs:
           at: .
       - aws-cli/setup:
           profile-name: default
-      - run: aws s3 sync ./public/ s3://awssaintbucket
+      - run: aws s3 sync ./build/ s3://to-do-test
       
 workflows:
     build:

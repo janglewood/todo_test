@@ -12,5 +12,5 @@ export const useSaga = (saga, params = [], shouldCancel = true) => {
                 runningSaga.cancel();
             };
         }
-    }, [saga, shouldCancel]);
+    }, [saga, shouldCancel, params]); // should i use params for proper work??
 };
